@@ -6,7 +6,6 @@ function App(props) {
 	return (
 		<div className="App">
 			<DefaultLayout>{props.chidren}</DefaultLayout>
-			{/* <Entry /> */}
 		</div>
 	);
 }
