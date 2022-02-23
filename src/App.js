@@ -1,10 +1,12 @@
 import "./App.css";
-import Entry from "./containers/entry/Entry";
+// import Entry from "./containers/entry/Entry";
+import DefaultLayout from "./layout/DefaultLayout";
 
-function App() {
+function App(props) {
 	return (
 		<div className="App">
-			<Entry />
+			<DefaultLayout>{props.chidren}</DefaultLayout>
+			{/* <Entry /> */}
 		</div>
 	);
 }
