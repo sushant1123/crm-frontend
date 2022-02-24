@@ -7,31 +7,31 @@
 	},
 	{
 		"id": 2,
-		"subject": "SSL issue",
+		"subject": "Email issue",
 		"status": "Client Response pending",
 		"addedAt": "2022-02-23"
 	},
 	{
 		"id": 3,
-		"subject": "SSL issue",
+		"subject": "Network issue",
 		"status": "Client Response pending",
 		"addedAt": "2022-02-23"
 	},
 	{
 		"id": 4,
-		"subject": "SSL issue",
+		"subject": "Hardware issue",
 		"status": "Client Response pending",
 		"addedAt": "2022-02-23"
 	},
 	{
 		"id": 5,
-		"subject": "SSL issue",
+		"subject": "Secret expired",
 		"status": "Client Response pending",
 		"addedAt": "2022-02-23"
 	},
 	{
 		"id": 6,
-		"subject": "SSL issue",
+		"subject": "App crashing issue",
 		"status": "Client Response pending",
 		"addedAt": "2022-02-23"
 	},
