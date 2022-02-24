@@ -47,7 +47,7 @@ const Login = ({ handleOnChange, email, password, handleOnSubmit, formSwitcher }
 
 			<Row>
 				<Col>
-					<a href="#" className="link-primary" onClick={() => formSwitcher("reset")}>
+					<a href="!#" className="link-primary" onClick={() => formSwitcher("reset")}>
 						Forgot Password
 					</a>
 				</Col>

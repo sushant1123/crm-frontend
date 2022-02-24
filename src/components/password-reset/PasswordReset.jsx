@@ -33,7 +33,7 @@ const PasswordReset = ({ handleOnChange, email, handlePasswordResetSubmit, formS
 
 			<Row>
 				<Col>
-					<a href="#" className="link-primary" onClick={() => formSwitcher("login")}>
+					<a href="!#" className="link-primary" onClick={() => formSwitcher("login")}>
 						Login Now
 					</a>
 				</Col>
