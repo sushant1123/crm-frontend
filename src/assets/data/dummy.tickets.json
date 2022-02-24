@@ -3,7 +3,24 @@
 		"id": 1,
 		"subject": "SSL issue",
 		"status": "Client Response pending",
-		"addedAt": "2022-02-23"
+		"addedAt": "2022-02-23",
+		"history": [
+			{
+				"date": "2022-02-24",
+				"message": "Hello Developer",
+				"messageBy": "Client"
+			},
+			{
+				"date": "2022-02-24",
+				"message": "Hello Client",
+				"messageBy": "Developer"
+			},
+			{
+				"date": "2022-02-24",
+				"message": "Any update?",
+				"messageBy": "Client"
+			}
+		]
 	},
 	{
 		"id": 2,

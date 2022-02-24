@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import AddNewTicketForm from "../../components/add-ticket-form/AddNewTicketForm";
-import BreadCrum from "../../components/breadcrum/BreadCrum";
+import BreadCrumb from "../../components/breadcrumb/BreadCrumb";
 import { shortText } from "../../utils/validation";
 
 const initialAddNewTicketData = {
@@ -61,7 +61,7 @@ const AddTicket = () => {
 		<Container>
 			<Row>
 				<Col>
-					<BreadCrum page="Add New Ticket" />
+					<BreadCrumb page="Add New Ticket" />
 				</Col>
 			</Row>
 			<Row>

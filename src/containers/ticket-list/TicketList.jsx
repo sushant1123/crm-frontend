@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import BreadCrum from "../../components/breadcrum/BreadCrum";
+import BreadCrumb from "../../components/breadcrumb/BreadCrumb";
 import SearchForm from "../search-form/SearchForm";
 import TicketsTable from "../../components/tickets-table/TicketsTable";
 import tickets from "../../assets/data/dummy.tickets.json";
@@ -30,7 +30,7 @@ const TicketList = () => {
 		<Container>
 			<Row>
 				<Col>
-					<BreadCrum page="Ticket List" />
+					<BreadCrumb page="Ticket List" />
 				</Col>
 			</Row>
 
