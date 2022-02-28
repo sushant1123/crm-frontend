@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const TicketsTable = () => {
-	const { tickets, searchTicketList, isLoading, error } = useSelector((state) => state.tickets);
+	const { searchTicketList, isLoading, error } = useSelector((state) => state.tickets);
 
 	if (isLoading) {
 		return <h3>Loading.....!</h3>;
@@ -42,7 +42,7 @@ const TicketsTable = () => {
 					})
 				) : (
 					<tr>
-						<td colSpan={4} className="text-center">
+						<td colSpan={5} className="text-center">
 							No Tickets to show
 						</td>
 					</tr>

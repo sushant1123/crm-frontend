@@ -6,7 +6,10 @@ import { useNavigate } from "react-router-dom";
 
 const Header = () => {
 	const navigate = useNavigate();
+
 	const logoutRequest = () => {
+		sessionStorage.removeItem("accessToken");
+		localStorage.removeItem("crmSite");
 		navigate("/");
 	};
 

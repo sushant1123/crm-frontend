@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Form, Button, Spinner, Alert } from "react-bootstrap";
 import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
@@ -12,6 +12,12 @@ const Login = ({ formSwitcher }) => {
 
 	const dispatch = useDispatch();
 	const { isLoading, isAuth, error } = useSelector((state) => state.login);
+
+	useEffect(() => {
+		if (isAuth) {
+			navigate("/dashboard");
+		}
+	}, [isAuth, navigate]);
 
 	const handleOnChange = (e) => {
 		const { name, value } = e.target;
@@ -37,10 +43,6 @@ const Login = ({ formSwitcher }) => {
 
 		dispatch(userLogin({ email, password }));
 	};
-
-	if (isAuth) {
-		navigate("/dashboard");
-	}
 
 	return (
 		<Container>

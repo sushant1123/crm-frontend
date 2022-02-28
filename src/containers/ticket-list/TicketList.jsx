@@ -3,7 +3,6 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import BreadCrumb from "../../components/breadcrumb/BreadCrumb";
 import SearchForm from "../search-form/SearchForm";
 import TicketsTable from "../../components/tickets-table/TicketsTable";
-// import tickets from "../../assets/data/dummy.tickets.json";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { fetchAllTickets } from "./tickets.actions";
