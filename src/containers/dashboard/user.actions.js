@@ -1,24 +1,17 @@
-import axios from "../../helpers/axios";
+import { fetchUser } from "../../api/user.api";
 import { getUserFailure, getUserRequest, getUserSuccess } from "./userSlice";
 
 export const getUserProfile = (user) => async (dispatch) => {
 	try {
 		dispatch(getUserRequest());
 
-		const accessToken = sessionStorage.getItem("accessToken");
-		if (!accessToken) {
-			dispatch(getUserFailure("Token not found.."));
+		const result = await fetchUser();
+		// console.log(result);
+		if (result.user && result.user._id) {
+			return dispatch(getUserSuccess(result.user));
 		}
 
-		const result = await axios.get("/user", {
-			headers: {
-				Authorization: `Bearer ${accessToken}`,
-			},
-		});
-
-		if (result.data.user && result.data.user._id) {
-			dispatch(getUserSuccess(result.data.user));
-		}
+		dispatch(getUserFailure("User is not found"));
 	} catch (error) {
 		console.log(error);
 		dispatch(getUserFailure(error.message));

@@ -1,5 +1,5 @@
 import { fetchTicketRequest, fetchTicketSuccess, fetchTicketFailure, searchTickets } from "./ticketSlice";
-import axios from "../../helpers/axios";
+import { getAllTickets } from "../../api/ticket.api";
 
 //is higher order fn. (fn inside another fn)
 // is like writing fetchAllTickets =()=> {
@@ -8,16 +8,14 @@ import axios from "../../helpers/axios";
 export const fetchAllTickets = () => async (dispatch) => {
 	try {
 		dispatch(fetchTicketRequest());
-		const accessToken = sessionStorage.getItem("accessToken");
 
-		const result = await axios.get("/ticket", {
-			headers: {
-				Authorization: `Bearer ${accessToken}`,
-			},
-		});
-		console.log(result);
+		const result = await getAllTickets();
 
-		dispatch(fetchTicketSuccess(result.data.result));
+		if (result && result.result.length) {
+			dispatch(fetchTicketSuccess(result.result));
+		}
+
+		dispatch(fetchTicketSuccess(result.result));
 	} catch (error) {
 		const { message } = error;
 		dispatch(fetchTicketFailure(message));

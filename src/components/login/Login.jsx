@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Form, Button, Spinner, Alert } from "react-bootstrap";
 import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
-import { userLogin } from "./login.actions";
+import { userLogin } from "../../api/user.api";
 import { useNavigate } from "react-router-dom";
 import { userLoginRequest, userLoginFailure, userLoginSuccess } from "./loginSlice";
 import { getUserProfile } from "../../containers/dashboard/user.actions";

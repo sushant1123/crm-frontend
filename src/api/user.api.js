@@ -1,9 +1,5 @@
-import axios from "../../helpers/axios";
+import axios from "../helpers/axios";
 
-//is higher order fn. (fn inside another fn)
-// is like writing fetchAllTickets =()=> {
-//   return async (dispatch)=>{}
-// }
 export const userLogin = (payload) => {
 	return new Promise(async (resolve, reject) => {
 		try {
@@ -19,6 +15,28 @@ export const userLogin = (payload) => {
 		} catch (error) {
 			console.log(error.response.data.message);
 			reject(error.response.data);
+		}
+	});
+};
+
+export const fetchUser = async (user) => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			const accessToken = sessionStorage.getItem("accessToken");
+			if (!accessToken) {
+				reject("Token not found!");
+			}
+
+			const result = await axios.get("/user", {
+				headers: {
+					Authorization: `Bearer ${accessToken}`,
+				},
+			});
+
+			resolve(result.data);
+		} catch (error) {
+			console.log(error);
+			reject(error.message);
 		}
 	});
 };

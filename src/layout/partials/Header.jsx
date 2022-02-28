@@ -3,7 +3,7 @@ import { Navbar, Nav, Container } from "react-bootstrap";
 import logo from "../../assets/images/logo.png";
 import { LinkContainer } from "react-router-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { userLogout } from "../../components/login/login.actions";
+import { userLogout } from "../../api/user.api";
 
 const Header = () => {
 	const navigate = useNavigate();
