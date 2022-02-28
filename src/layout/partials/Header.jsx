@@ -3,13 +3,15 @@ import { Navbar, Nav, Container } from "react-bootstrap";
 import logo from "../../assets/images/logo.png";
 import { LinkContainer } from "react-router-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { userLogout } from "../../components/login/login.actions";
 
 const Header = () => {
 	const navigate = useNavigate();
 
 	const logoutRequest = () => {
 		sessionStorage.removeItem("accessToken");
-		localStorage.removeItem("crmSite");
+		// localStorage.removeItem("crmSite");
+		// userLogout();
 		navigate("/");
 	};
 

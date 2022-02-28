@@ -4,20 +4,22 @@ import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
 import { userLogin } from "./login.actions";
 import { useNavigate } from "react-router-dom";
+import { userLoginRequest, userLoginFailure, userLoginSuccess } from "./loginSlice";
+import { getUserProfile } from "../../containers/dashboard/user.actions";
 
 const Login = ({ formSwitcher }) => {
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
+	const [email, setEmail] = useState("sushantbahirat001@gmail.com");
+	const [password, setPassword] = useState("Sushant@123");
 	const navigate = useNavigate();
 
 	const dispatch = useDispatch();
-	const { isLoading, isAuth, error } = useSelector((state) => state.login);
+	const { isLoading, error } = useSelector((state) => state.login);
 
 	useEffect(() => {
-		if (isAuth) {
+		if (sessionStorage.getItem("accessToken")) {
 			navigate("/dashboard");
 		}
-	}, [isAuth, navigate]);
+	}, [navigate]);
 
 	const handleOnChange = (e) => {
 		const { name, value } = e.target;
@@ -35,13 +37,28 @@ const Login = ({ formSwitcher }) => {
 		}
 	};
 
-	const handleOnSubmit = (e) => {
+	const handleOnSubmit = async (e) => {
 		e.preventDefault();
 		if (!email || !password) {
 			return alert("Fill up all the details");
 		}
 
-		dispatch(userLogin({ email, password }));
+		dispatch(userLoginRequest());
+
+		try {
+			const isAuth = await userLogin({ email, password });
+
+			if (isAuth.status === "error") {
+				return dispatch(userLoginFailure(isAuth.message));
+			}
+
+			dispatch(userLoginSuccess());
+			dispatch(getUserProfile());
+			navigate("/dashboard");
+		} catch (error) {
+			console.log(error.response.data.message);
+			dispatch(userLoginFailure(error.response.data.message));
+		}
 	};
 
 	return (
