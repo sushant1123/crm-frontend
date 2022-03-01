@@ -26,6 +26,7 @@ const ticketListSlice = createSlice({
 			state.isLoading = false;
 			state.error = action.payload;
 		},
+
 		searchTickets: (state, action) => {
 			state.searchTicketList = state.tickets.filter((ticket) => {
 				if (!action.payload) return ticket;
@@ -33,6 +34,7 @@ const ticketListSlice = createSlice({
 				return ticket.subject.toLowerCase().includes(action.payload.toLowerCase());
 			});
 		},
+
 		fetchSingleTicketRequest: (state, action) => {
 			state.isLoading = true;
 		},
@@ -71,6 +73,13 @@ const ticketListSlice = createSlice({
 			state.isLoading = false;
 			state.error = action.payload;
 		},
+
+		resetResponseMsgs: (state, action) => {
+			state.isLoading = false;
+			state.error = "";
+			state.replyMsg = "";
+			state.replyTicketError = "";
+		},
 	},
 });
 
@@ -90,6 +99,7 @@ export const {
 	closeTicketRequest,
 	closeTicketSuccess,
 	closeTicketFailure,
+	resetResponseMsgs,
 } = actions;
 
 export default reducer;

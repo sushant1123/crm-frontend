@@ -7,17 +7,25 @@ import BreadCrumb from "../../components/breadcrumb/BreadCrumb";
 import MessageHistory from "../message-history/MessageHistory";
 import UpdateTicket from "../../components/update-ticket/UpdateTicket";
 import { closeTicket, fetchSingleTicket } from "../ticket-list/tickets.actions";
+import { resetResponseMsgs } from "../ticket-list/ticketSlice";
 
 const TicketDetails = () => {
-	const { isLoading, error, selectedTicket, replyTicketError } = useSelector((state) => state.tickets);
-	const { replyMsg } = useSelector((state) => state.tickets);
+	const { isLoading, error, selectedTicket, replyTicketError, replyMsg } = useSelector(
+		(state) => state.tickets
+	);
 
 	const dispatch = useDispatch();
 	const { tId } = useParams();
 
 	useEffect(() => {
 		dispatch(fetchSingleTicket(tId));
-	}, [tId, dispatch]);
+
+		return () => {
+			if (error || replyMsg || replyTicketError) {
+				dispatch(resetResponseMsgs());
+			}
+		};
+	}, [tId, dispatch, error, replyMsg, replyTicketError]);
 
 	return (
 		<Container>

@@ -110,6 +110,15 @@ const Login = ({ formSwitcher }) => {
 					</a>
 				</Col>
 			</Row>
+
+			<Row className="py-4">
+				<Col>
+					Are you new here?{" "}
+					<a href="/registration" className="link-primary" onClick={() => formSwitcher("reset")}>
+						Signup User
+					</a>
+				</Col>
+			</Row>
 		</Container>
 	);
 };

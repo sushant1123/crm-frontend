@@ -1,5 +1,6 @@
 import "./App.css";
 import Entry from "./containers/entry/Entry";
+import Registration from "./containers/registration/Registration";
 import DefaultLayout from "./layout/DefaultLayout";
 import AddTicket from "./containers/add-new-ticket/AddTicket";
 import Dashboard from "./containers/dashboard/Dashboard";
@@ -14,6 +15,7 @@ function App() {
 			<Router>
 				<Routes>
 					<Route path="/" element={<Entry />} />
+					<Route path="/registration" element={<Registration />} />
 
 					{/* way 1 */}
 					{/* <DefaultLayout>

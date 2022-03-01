@@ -6,6 +6,7 @@ import { addNewTicket } from "./addTicket.actions";
 
 import "./addNewTicketForm.style.css";
 import { useDispatch, useSelector } from "react-redux";
+import { resetSuccessMsg } from "./addTicketSlice";
 
 const initialAddNewTicketData = {
 	subject: "",
@@ -29,10 +30,15 @@ const AddNewTicketForm = () => {
 	} = useSelector((state) => state.user);
 
 	const { isLoading, error, successMsg } = useSelector((state) => state.newTicket);
-
-	useEffect(() => {}, [formData, formDataError]);
-
 	const dispatch = useDispatch();
+
+	useEffect(() => {
+		return () => {
+			if (!successMsg) {
+				dispatch(resetSuccessMsg());
+			}
+		};
+	}, [successMsg, dispatch, formData, formDataError]);
 
 	const handleOnChange = (e) => {
 		const { name, value } = e.target;
