@@ -22,7 +22,7 @@ const TicketsTable = () => {
 					<th>Ticket Id</th>
 					<th>Subject</th>
 					<th>Ticket Status</th>
-					<th>Added At</th>
+					<th>Opened At</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -36,7 +36,7 @@ const TicketsTable = () => {
 									<Link to={`/ticket/${ticket._id}`}>{ticket.subject}</Link>
 								</td>
 								<td>{ticket.status}</td>
-								<td>{ticket.openedAt}</td>
+								<td>{ticket.openedAt && new Date(ticket.openedAt).toLocaleString()}</td>
 							</tr>
 						);
 					})

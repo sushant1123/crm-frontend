@@ -1,8 +1,37 @@
-import React from "react";
-import { Form, Button } from "react-bootstrap";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { useSelector, useDispatch } from "react-redux";
+import { Form, Button } from "react-bootstrap";
+import { replyOnTicket } from "../../containers/ticket-list/tickets.actions";
 
-const UpdateTicket = ({ message, handleOnChange, handleOnSubmit }) => {
+const UpdateTicket = ({ _id }) => {
+	//get only the name of the user from user object.
+	const {
+		user: { name },
+	} = useSelector((state) => state.user);
+
+	const dispatch = useDispatch();
+
+	const [message, setMessage] = useState("");
+
+	const handleOnChange = (e) => {
+		const { value } = e.target;
+		setMessage(value);
+	};
+
+	const handleOnSubmit = (e) => {
+		e.preventDefault();
+
+		const messageObj = {
+			message,
+			sender: name,
+		};
+		// alert(JSON.stringify(messageObj));
+		dispatch(replyOnTicket(_id, messageObj));
+
+		setMessage("");
+	};
+
 	return (
 		<Form onSubmit={handleOnSubmit}>
 			<Form.Label>Reply</Form.Label>
@@ -22,7 +51,5 @@ const UpdateTicket = ({ message, handleOnChange, handleOnSubmit }) => {
 export default UpdateTicket;
 
 UpdateTicket.propTypes = {
-	message: PropTypes.string.isRequired,
-	handleOnChange: PropTypes.func.isRequired,
-	handleOnSubmit: PropTypes.func.isRequired,
+	_id: PropTypes.string.isRequired,
 };

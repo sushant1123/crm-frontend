@@ -12,7 +12,9 @@ const MessageHistory = ({ msgs }) => {
 					<div className="message-history mt-3" key={index}>
 						<div className="send font-weight-bold text-secondary">
 							<div className="sender">{msg.sender}</div>
-							<div className="date">{msg.messagedAt}</div>
+							<div className="date">
+								{msg.messagedAt && new Date(msg.messagedAt).toLocaleString()}
+							</div>
 						</div>
 						<div className="message text-right">{msg.message}</div>
 					</div>

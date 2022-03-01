@@ -1,13 +1,75 @@
-import React from "react";
-import "./addNewTicketForm.style.css";
-import { Form, Button, Row, Col } from "react-bootstrap";
-import PropTypes from "prop-types";
+import React, { useState, useEffect } from "react";
+import { Form, Button, Row, Col, Spinner, Alert } from "react-bootstrap";
+// import PropTypes from "prop-types";
+import { shortText } from "../../utils/validation";
+import { addNewTicket } from "./addTicket.actions";
 
-const AddNewTicketForm = ({ handleOnSubmit, handleOnChange, formData, formDataError }) => {
+import "./addNewTicketForm.style.css";
+import { useDispatch, useSelector } from "react-redux";
+
+const initialAddNewTicketData = {
+	subject: "",
+	issueDate: "",
+	message: "",
+	sender: "",
+};
+
+const initialAddNewTicketErrorData = {
+	subject: false,
+	issueDate: false,
+	message: false,
+	sender: false,
+};
+
+const AddNewTicketForm = () => {
+	const [formData, setFormData] = useState(initialAddNewTicketData);
+	const [formDataError, setFormDataError] = useState(initialAddNewTicketErrorData);
+	const {
+		user: { name },
+	} = useSelector((state) => state.user);
+
+	const { isLoading, error, successMsg } = useSelector((state) => state.newTicket);
+
+	useEffect(() => {}, [formData, formDataError]);
+
+	const dispatch = useDispatch();
+
+	const handleOnChange = (e) => {
+		const { name, value } = e.target;
+
+		//additional
+		setFormDataError(initialAddNewTicketErrorData);
+
+		setFormData({
+			...formData,
+			[name]: value,
+		});
+	};
+
+	const handleOnSubmit = (e) => {
+		e.preventDefault();
+
+		setFormDataError(initialAddNewTicketErrorData);
+
+		const isSubjectValid = shortText(formData.subject);
+
+		setFormDataError({
+			...formDataError,
+			subject: !isSubjectValid,
+		});
+
+		dispatch(addNewTicket({ ...formData, sender: name }));
+	};
+
 	return (
 		<div className="jumbotron add-new-ticket">
 			<h1 className="text-center text-info">Add New Ticket</h1>
 			<hr />
+			<div>
+				{isLoading && <Spinner variant="primary" animation="border" />}
+				{successMsg && <Alert variant="success">{successMsg}</Alert>}
+				{error && <Alert variant="danger">{error}</Alert>}
+			</div>
 			<Form onSubmit={handleOnSubmit}>
 				<Form.Group className="mb-3" as={Row}>
 					<Form.Label column sm="3">
@@ -49,14 +111,14 @@ const AddNewTicketForm = ({ handleOnSubmit, handleOnChange, formData, formDataEr
 				</Form.Group>
 
 				<Form.Group className="mb-3" as={Row}>
-					<Form.Label column>Status</Form.Label>
+					<Form.Label column>message</Form.Label>
 					<Col sm="12">
 						<Form.Control
 							as="textarea"
-							name="status"
+							name="message"
 							rows="5"
-							placeholder="Enter status"
-							value={formData.status}
+							placeholder="Enter message"
+							value={formData.message}
 							onChange={handleOnChange}
 							required
 						/>
@@ -76,9 +138,9 @@ const AddNewTicketForm = ({ handleOnSubmit, handleOnChange, formData, formDataEr
 
 export default AddNewTicketForm;
 
-AddNewTicketForm.propTypes = {
-	handleOnChange: PropTypes.func.isRequired,
-	handleOnSubmit: PropTypes.func.isRequired,
-	formData: PropTypes.object.isRequired,
-	formDataError: PropTypes.object.isRequired,
-};
+// AddNewTicketForm.propTypes = {
+// 	handleOnChange: PropTypes.func.isRequired,
+// 	handleOnSubmit: PropTypes.func.isRequired,
+// 	formData: PropTypes.object.isRequired,
+// 	formDataError: PropTypes.object.isRequired,
+// };
