@@ -41,6 +41,34 @@ export const fetchUser = async (user) => {
 	});
 };
 
+export const fetchNewAccessToken = async (user) => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			//get the refresh token stored in the localstorage
+			const { refreshToken } = JSON.parse(localStorage.getItem("crmSite"));
+			if (!refreshToken) {
+				reject("Token not found!");
+			}
+
+			const result = await axios.get("/tokens", {
+				headers: { Authorization: `Bearer ${refreshToken}` },
+			});
+			// console.log("from fetchNewAccessToken api", result);
+
+			if (result.data.status === "success") {
+				sessionStorage.setItem("accessToken", result.data.accessToken);
+			}
+
+			resolve(true);
+		} catch (error) {
+			if (error.message === "Request failed with status code 403") {
+				localStorage.removeItem("crmSite");
+			}
+			reject(false);
+		}
+	});
+};
+
 export const userLogout = async () => {
 	try {
 		await axios.delete("/user/logout", {

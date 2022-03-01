@@ -12,10 +12,7 @@ const TicketList = () => {
 
 	useEffect(() => {
 		dispatch(fetchAllTickets());
-	}, []);
-
-	//not required
-	useEffect(() => {}, [dispatch]);
+	}, [dispatch]);
 
 	return (
 		<Container>

@@ -9,9 +9,9 @@ const Header = () => {
 	const navigate = useNavigate();
 
 	const logoutRequest = () => {
+		userLogout();
 		sessionStorage.removeItem("accessToken");
-		// localStorage.removeItem("crmSite");
-		// userLogout();
+		localStorage.removeItem("crmSite");
 		navigate("/");
 	};
 
