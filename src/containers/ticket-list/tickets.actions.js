@@ -60,7 +60,7 @@ export const replyOnTicket = (_id, messageObj) => async (dispatch) => {
 		dispatch(replyTicketRequest());
 
 		const result = await updateReplyTicket(_id, messageObj);
-		console.log("replyOnTicket", result);
+		// console.log("replyOnTicket", result);
 
 		if (result.status === "error") {
 			return dispatch(replyTicketFailure(result.message));
@@ -79,7 +79,7 @@ export const closeTicket = (_id) => async (dispatch) => {
 	try {
 		dispatch(closeTicketRequest());
 		const result = await updateTicketStatusToClose(_id);
-		console.log(result);
+		// console.log(result);
 		if (result.status === "error") {
 			return dispatch(closeTicketFailure(result.message));
 		}

@@ -28,11 +28,6 @@ const TicketDetails = () => {
 			</Row>
 
 			<Row>
-				<Col>{replyMsg && <Alert variant="success">{replyMsg}</Alert>}</Col>
-				<Col>{replyMsg && <Alert variant="success">{replyMsg}</Alert>}</Col>
-			</Row>
-
-			<Row>
 				<Col>
 					{isLoading && <Spinner variant="primary" animation="border" />}
 					{error && <Alert variant="danger">{error}</Alert>}

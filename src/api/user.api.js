@@ -13,7 +13,7 @@ export const userLogin = (payload) => {
 			}
 			resolve(result);
 		} catch (error) {
-			console.log(error.response.data.message);
+			// console.log(error.response.data.message);
 			reject(error.response.data);
 		}
 	});
@@ -35,8 +35,8 @@ export const fetchUser = async (user) => {
 
 			resolve(result.data);
 		} catch (error) {
-			console.log(error);
-			reject(error.message);
+			// console.log(error);
+			reject(error.response.data.message);
 		}
 	});
 };
