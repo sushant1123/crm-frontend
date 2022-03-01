@@ -1,26 +1,25 @@
 import React, { useState, useEffect } from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row, Spinner } from "react-bootstrap";
 import BreadCrumb from "../../components/breadcrumb/BreadCrumb";
-import tickets from "../../assets/data/dummy.tickets.json";
 import MessageHistory from "../message-history/MessageHistory";
 import UpdateTicket from "../../components/update-ticket/UpdateTicket";
 import { useParams } from "react-router-dom";
+import { fetchSingleTicket } from "../ticket-list/tickets.actions";
+import { useDispatch, useSelector } from "react-redux";
+import { Alert } from "bootstrap";
 
 // const ticket = tickets[0];
 const TicketDetails = () => {
 	const [message, setMessage] = useState("");
 	const [ticket, setTicket] = useState({});
 
+	const { isLoading, error, selectedTicket } = useSelector((state) => state.tickets);
+	const dispatch = useDispatch();
 	const { tId } = useParams();
 
 	useEffect(() => {
-		for (let i = 0; i < tickets.length; i++) {
-			if (tickets[i].id == tId) {
-				setTicket(tickets[i]);
-				break;
-			}
-		}
-	}, [message, tId]);
+		dispatch(fetchSingleTicket(tId));
+	}, [message, tId, dispatch]);
 
 	const handleOnChange = (e) => {
 		const { value } = e.target;
@@ -40,10 +39,17 @@ const TicketDetails = () => {
 			</Row>
 
 			<Row>
+				<Col>
+					{isLoading && <Spinner variant="primary" animation="border" />}
+					{error && <Alert variant="danger">{error}</Alert>}
+				</Col>
+			</Row>
+
+			<Row>
 				<Col className="text-weight-bold text-secondary">
-					<div className="subject">Subject: {ticket.subject}</div>
-					<div className="openedAt">Opened Date: {ticket.addedAt}</div>
-					<div className="status">Status: {ticket.status}</div>
+					<div className="subject">Subject: {selectedTicket.subject}</div>
+					<div className="openedAt">Opened Date: {selectedTicket.openedAt}</div>
+					<div className="status">Status: {selectedTicket.status}</div>
 				</Col>
 
 				<Col className="text-end">
@@ -52,7 +58,9 @@ const TicketDetails = () => {
 			</Row>
 
 			<Row className="mt-4">
-				<Col>{ticket.history && <MessageHistory msgs={ticket.history} />}</Col>
+				<Col>
+					{selectedTicket.conversations && <MessageHistory msgs={selectedTicket.conversations} />}
+				</Col>
 			</Row>
 
 			<hr />

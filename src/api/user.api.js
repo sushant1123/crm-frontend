@@ -7,11 +7,11 @@ export const userLogin = (payload) => {
 
 			let result = await axios.post("/user/login", { email, password });
 
-			resolve(result);
 			if (result.data.status === "success") {
 				sessionStorage.setItem("accessToken", result.data.accessToken);
 				localStorage.setItem("crmSite", JSON.stringify({ refreshToken: result.data.refreshToken }));
 			}
+			resolve(result);
 		} catch (error) {
 			console.log(error.response.data.message);
 			reject(error.response.data);
