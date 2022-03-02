@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import { Form, Button, Container, Row, Col, Spinner, Alert } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { newUserRegistration } from "./registration.actions";
+import { resetRegistrationMsgs } from "./userRegistrationSlice";
 
 const initialFormState = {
-	name: "",
-	phone: "",
-	email: "",
-	company: "",
-	address: "",
-	password: "",
-	confirmPassword: "",
+	name: "Sush Bahirat",
+	phone: 1234567890,
+	email: "sushantbahirat005@gmail.com",
+	company: "Some company",
+	address: "Somewhere on the earth",
+	password: "Sushant@12",
+	confirmPassword: "Sushant@12",
 };
 
 const passwordVerificationError = {
@@ -24,7 +27,14 @@ const RegistrationForm = () => {
 	const [newUser, setNewUser] = useState(initialFormState);
 	const [passwordError, setPasswordError] = useState(passwordVerificationError);
 
-	useEffect(() => {}, [newUser]);
+	const { isLoading, status, message } = useSelector((state) => state.registration);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		return () => {
+			dispatch(resetRegistrationMsgs());
+		};
+	}, [newUser]);
 
 	const handleOnChange = (e) => {
 		const { name, value } = e.target;
@@ -47,8 +57,10 @@ const RegistrationForm = () => {
 	};
 
 	const handleOnSubmit = (e) => {
-		console.log(newUser);
+		// console.log(newUser);
 		e.preventDefault();
+
+		dispatch(newUserRegistration(newUser));
 	};
 
 	return (
@@ -60,6 +72,14 @@ const RegistrationForm = () => {
 			</Row>
 
 			<hr />
+
+			<Row>
+				<Col>
+					{message && (
+						<Alert variant={status === "success" ? "success" : "danger"}>{message}</Alert>
+					)}
+				</Col>
+			</Row>
 
 			<Row>
 				<Col>
@@ -173,6 +193,7 @@ const RegistrationForm = () => {
 							>
 								Submit
 							</Button>
+							{isLoading && <Spinner variant="primary" animation="border" />}
 						</div>
 					</Form>
 				</Col>

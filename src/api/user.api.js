@@ -1,5 +1,20 @@
 import axios from "../helpers/axios";
 
+export const userRegistration = (payload) => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			const result = await axios.post("/user/create", payload);
+
+			// if (result.data.status === "success") {
+			// }
+			resolve(result.data);
+		} catch (error) {
+			console.log(error.response.data);
+			reject(error.response.data);
+		}
+	});
+};
+
 export const userLogin = (payload) => {
 	return new Promise(async (resolve, reject) => {
 		try {
