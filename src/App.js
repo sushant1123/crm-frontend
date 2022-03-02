@@ -8,6 +8,7 @@ import TicketList from "./containers/ticket-list/TicketList";
 import TicketDetails from "./containers/ticket-details/TicketDetails";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import PrivateRoute from "./components/private-route/PrivateRoute";
+import UserVerification from "./containers/user-verification/UserVerification";
 
 function App() {
 	return (
@@ -16,6 +17,7 @@ function App() {
 				<Routes>
 					<Route path="/" element={<Entry />} />
 					<Route path="/registration" element={<Registration />} />
+					<Route path="/user-verification/:_id/:email" element={<UserVerification />} />
 
 					{/* way 1 */}
 					{/* <DefaultLayout>

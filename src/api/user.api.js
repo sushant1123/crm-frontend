@@ -16,6 +16,22 @@ export const userRegistration = (payload) => {
 	});
 };
 
+export const userRegistrationVerification = (payload) => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			const result = await axios.post("/user/verify", payload);
+
+			resolve(result.data);
+			if (result.data.status === "success") {
+				resolve(result.data);
+			}
+		} catch (error) {
+			console.log(error.response.data);
+			reject(error.response.data);
+		}
+	});
+};
+
 export const userLogin = (payload) => {
 	return new Promise(async (resolve, reject) => {
 		try {
