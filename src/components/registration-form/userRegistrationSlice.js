@@ -12,8 +12,8 @@ const userRegistrationSlice = createSlice({
 	reducers: {
 		userRegistrationRequest: (state, action) => {
 			state.isLoading = true;
-			state.status = "";
-			state.message = "";
+			// state.status = "";
+			// state.message = "";
 		},
 		userRegistrationSuccess: (state, action) => {
 			state.isLoading = false;
@@ -26,11 +26,11 @@ const userRegistrationSlice = createSlice({
 			state.message = action.payload;
 		},
 
-		resetRegistrationMsgs: (state, action) => {
-			state.isLoading = false;
-			state.status = "";
-			state.message = "";
-		},
+		// resetRegistrationMsgs: (state, action) => {
+		// 	state.isLoading = false;
+		// 	state.status = "";
+		// 	state.message = "";
+		// },
 	},
 });
 
@@ -40,7 +40,7 @@ export const {
 	userRegistrationFailure,
 	userRegistrationSuccess,
 	userRegistrationRequest,
-	resetRegistrationMsgs,
+	// resetRegistrationMsgs,
 } = actions;
 
 export default reducer;

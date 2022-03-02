@@ -21,11 +21,11 @@ const TicketDetails = () => {
 		dispatch(fetchSingleTicket(tId));
 
 		return () => {
-			if (error || replyMsg || replyTicketError) {
+			if (replyMsg || replyTicketError) {
 				dispatch(resetResponseMsgs());
 			}
 		};
-	}, [tId, dispatch, error, replyMsg, replyTicketError]);
+	}, [tId, dispatch, replyMsg, replyTicketError]);
 
 	return (
 		<Container>

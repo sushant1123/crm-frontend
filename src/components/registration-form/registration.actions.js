@@ -11,11 +11,9 @@ export const newUserRegistration = (formData) => async (dispatch) => {
 		dispatch(userRegistrationRequest());
 		const result = await userRegistration(formData);
 		// console.log(result);
-		if (result.status === "success") {
-			dispatch(userRegistrationSuccess(result.message));
-		} else {
-			dispatch(userRegistrationFailure(result.message));
-		}
+		result.status === "success"
+			? dispatch(userRegistrationSuccess(result.message))
+			: dispatch(userRegistrationFailure(result.message));
 	} catch (error) {
 		dispatch(userRegistrationFailure(error.message));
 	}

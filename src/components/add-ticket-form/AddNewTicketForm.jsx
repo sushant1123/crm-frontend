@@ -34,7 +34,7 @@ const AddNewTicketForm = () => {
 
 	useEffect(() => {
 		return () => {
-			if (!successMsg) {
+			if (successMsg) {
 				dispatch(resetSuccessMsg());
 			}
 		};

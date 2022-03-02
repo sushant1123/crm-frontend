@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Form, Button, Container, Row, Col, Spinner, Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { newUserRegistration } from "./registration.actions";
-import { resetRegistrationMsgs } from "./userRegistrationSlice";
+// import { resetRegistrationMsgs } from "./userRegistrationSlice";
 
 const initialFormState = {
 	name: "Sush Bahirat",
-	phone: 1234567890,
+	phone: 5000000001,
 	email: "sushantbahirat005@gmail.com",
 	company: "Some company",
 	address: "Somewhere on the earth",
@@ -31,9 +31,9 @@ const RegistrationForm = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		return () => {
-			dispatch(resetRegistrationMsgs());
-		};
+		// return () => {
+		// 	dispatch(resetRegistrationMsgs());
+		// };
 	}, [newUser]);
 
 	const handleOnChange = (e) => {
@@ -60,7 +60,10 @@ const RegistrationForm = () => {
 		// console.log(newUser);
 		e.preventDefault();
 
-		dispatch(newUserRegistration(newUser));
+		const { name, phone, email, company, address, password } = newUser;
+
+		const newUserRegistrationObj = { name, phone, email, company, address, password };
+		dispatch(newUserRegistration(newUserRegistrationObj));
 	};
 
 	return (
