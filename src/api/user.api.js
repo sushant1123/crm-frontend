@@ -16,10 +16,10 @@ export const userRegistration = (payload) => {
 	});
 };
 
-export const userRegistrationVerification = (payload) => {
+export const userRegistrationVerification = (formData) => {
 	return new Promise(async (resolve, reject) => {
 		try {
-			const result = await axios.post("/user/verify", payload);
+			const result = await axios.patch("/user/verify", formData);
 
 			resolve(result.data);
 			if (result.data.status === "success") {
@@ -38,14 +38,14 @@ export const userLogin = (payload) => {
 			const { email, password } = payload;
 
 			let result = await axios.post("/user/login", { email, password });
-
+			// console.log(result);
 			if (result.data.status === "success") {
 				sessionStorage.setItem("accessToken", result.data.accessToken);
 				localStorage.setItem("crmSite", JSON.stringify({ refreshToken: result.data.refreshToken }));
 			}
-			resolve(result);
+			resolve(result.data);
 		} catch (error) {
-			// console.log(error.response.data.message);
+			console.log("from userLogin::user.api", error.response.data);
 			reject(error.response.data);
 		}
 	});

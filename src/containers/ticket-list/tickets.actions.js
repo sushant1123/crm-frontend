@@ -30,10 +30,11 @@ export const fetchAllTickets = () => async (dispatch) => {
 		dispatch(fetchTicketRequest());
 
 		const result = await getAllTickets();
-
+		console.log("from fetchAllTickets::tickets.actions", result);
 		if (result && result.result.length) {
-			dispatch(fetchTicketSuccess(result.result));
+			return dispatch(fetchTicketSuccess(result.result));
 		}
+		return dispatch(fetchTicketFailure());
 	} catch (error) {
 		const { message } = error;
 		dispatch(fetchTicketFailure(message));

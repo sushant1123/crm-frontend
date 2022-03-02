@@ -47,7 +47,7 @@ const Login = ({ formSwitcher }) => {
 
 		try {
 			const isAuth = await userLogin({ email, password });
-
+			// console.log("isAuth", isAuth);
 			if (isAuth.status === "error") {
 				return dispatch(userLoginFailure(isAuth.message));
 			}
@@ -56,8 +56,8 @@ const Login = ({ formSwitcher }) => {
 			dispatch(getUserProfile());
 			navigate("/dashboard");
 		} catch (error) {
-			console.log(error.response.data.message);
-			dispatch(userLoginFailure(error.response.data.message));
+			// console.log("from error", error);
+			dispatch(userLoginFailure(error.message));
 		}
 	};
 

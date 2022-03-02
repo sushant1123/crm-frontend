@@ -14,12 +14,6 @@ const Dashboard = () => {
 		if (!tickets.length) {
 			dispatch(fetchAllTickets());
 		}
-
-		// return () => {
-		// 	if (!tickets.length) {
-		// 		dispatch(fetchAllTickets());
-		// 	}
-		// };
 	}, [dispatch, tickets]);
 
 	const pendingTickets = tickets.filter((ticket) => ticket.status !== "Closed");

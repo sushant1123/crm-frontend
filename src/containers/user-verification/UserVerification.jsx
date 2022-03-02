@@ -27,6 +27,7 @@ const UserVerification = () => {
 	}, [response]);
 
 	//call api and send the _id to verify user
+	// console.log("response", response);
 
 	return (
 		<div className="registration-page bg-info">
