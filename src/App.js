@@ -9,6 +9,7 @@ import TicketDetails from "./containers/ticket-details/TicketDetails";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import UserVerification from "./containers/user-verification/UserVerification";
+import PasswordOtpForm from "./containers/password-reset/PasswordOtpForm";
 
 function App() {
 	return (
@@ -16,6 +17,7 @@ function App() {
 			<Router>
 				<Routes>
 					<Route path="/" element={<Entry />} />
+					<Route path="/reset-password" element={<PasswordOtpForm />} />
 					<Route path="/registration" element={<Registration />} />
 					<Route path="/user-verification/:_id/:email" element={<UserVerification />} />
 

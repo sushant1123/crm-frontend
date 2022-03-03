@@ -1,32 +1,30 @@
-import React, { useState } from "react";
+import React from "react";
 import LoginForm from "../../components/login/Login";
-import PasswordReset from "../../components/password-reset/PasswordReset";
+// import PasswordReset from "../../components/password-reset/PasswordReset";
 import "./entry.style.css";
 
 const Entry = () => {
-	const [formLoad, setFormLoad] = useState("login");
+	// const [formLoad, setFormLoad] = useState("login");
 
-	const handlePasswordResetSubmit = (e) => {
-		e.preventDefault();
-	};
+	// const handlePasswordResetSubmit = (e) => {
+	// 	e.preventDefault();
+	// };
 
-	const formSwitcher = (formType) => {
-		setFormLoad(formType);
-	};
+	// const formSwitcher = (formType) => {
+	// 	setFormLoad(formType);
+	// };
 
 	return (
 		<div className="entry-page bg-info">
 			<div className="jumbotron form-box">
-				{formLoad === "login" && <LoginForm formSwitcher={formSwitcher} />}
+				<LoginForm />
 
-				{formLoad === "reset" && (
+				{/* {formLoad === "reset" && (
 					<PasswordReset
-						// handleOnChange={handleOnChange}
-						// email={email}
 						handlePasswordResetSubmit={handlePasswordResetSubmit}
 						formSwitcher={formSwitcher}
 					/>
-				)}
+				)} */}
 			</div>
 		</div>
 	);
